@@ -40,6 +40,9 @@
     set iskeyword-=.                    " '.' is an end of word designator
     set iskeyword-=#                    " '#' is an end of word designator
     set iskeyword-=-                    " '-' is an end of word designator
+    set nobackup
+    set noswapfile
+    set ignorecase
 
 " }
 
@@ -136,6 +139,7 @@
     " Wrapped lines goes down/up to next row, rather than next line in file.
     noremap j gj
     noremap k gk
+    let mapleader = ","
 
 " }
 
@@ -171,8 +175,8 @@
 
     " NerdTree {
         if isdirectory(expand("~/.vim/bundle/nerdtree"))
-            map <C-e> <plug>NERDTreeTabsToggle<CR>
-            map <leader>e :NERDTreeFind<CR>
+            map <leader>e :NERDTreeToggle<CR>
+            "map <leader>e :NERDTreeFind<CR>
             nmap <leader>nt :NERDTreeFind<CR>
 
             let NERDTreeShowBookmarks=1
@@ -330,4 +334,38 @@
         "set term=builtin_ansi       " Make arrow and other keys work
     endif
 
+" }
+
+" Other Settings {
+    " NERDTree {
+        autocmd vimenter * if !argc() | NERDTree | endif
+        autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+    "}
+" }
+
+" Functions {
+    " Formart {
+        "function! Formart()
+        "    exec "w"
+        "    if &filetype == 'c'
+        "        exec "!astyle --style=ansi -a --suffix=none %"
+        "    elseif &filetype == 'cpp' || &filetype == 'hpp'
+        "        exec "r !astyle --style=ansi --one-line=keep-statements -a --suffix=none %> /dev/null 2>&1"
+        "    elseif &filetype == 'perl'
+        "        exec "!astyle --style=gnu --suffix=none %"
+        "    elseif &filetype == 'py'||&filetype == 'python'
+        "        exec "r !autopep8 -i --aggressive %"
+        "    elseif &filetype == 'java'
+        "        exec "!astyle --style=java --suffix=none %"
+        "    elseif &filetype == 'jsp'
+        "        exec "!astyle --style=gnu --suffix=none %"
+        "    elseif &filetype == 'xml'
+        "        exec "!astyle --style=gnu --suffix=none %"
+        "    else
+        "        exec "normal gg=G"
+        "        return
+        "    endif
+        "    exec "e! %"
+        "endfunction
+    "}
 " }

@@ -1,4 +1,6 @@
 Bundle 'gmarik/vundle'
+Bundle 'scrooloose/nerdtree'
+
 Bundle 'bling/vim-airline'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'tomasr/molokai'
